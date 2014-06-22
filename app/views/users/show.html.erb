@@ -1,0 +1,62 @@
+<h1>ユーザ詳細</h1>
+
+<p id="notice"><%= flash[:notice] %></p>
+
+<%= render 'error_messages', :error_param => @comment.errors %>
+
+
+
+<p>
+  <strong>名前:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>年齢:</strong>
+  <%= @user.age %>
+</p>
+
+<p>
+  <strong>性別:</strong>
+  <%= @user.gender ? '男' : '女' %>
+</p>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>コメント</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td><%= comment.message %></td>
+        <td><%= link_to 'コメントを削除', destroy_comment_user_path(:id => @user, :comment_id => comment), method: :delete, data: { confirm: 'このコメントを削除してもよろしいですか？' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<%= form_for(@comment, :url => {:action => 'create_comment'}) do |f| %>
+  <%= f.hidden_field :user_id, :value => @user.id %>
+  <div class="field">
+    <%= f.label :新規コメント： %><br>
+    <%= f.text_field :message, size:'50' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
+<%= link_to '変更', edit_user_path(@user) %> |
+<%= link_to '一覧へ戻る', users_path %>

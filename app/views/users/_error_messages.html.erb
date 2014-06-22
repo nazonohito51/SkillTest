@@ -1,0 +1,11 @@
+<% if error_param.any? %>
+  <div id="error_explanation">
+    <h2>以下のエラーが発生しました。</h2>
+
+    <ul>
+    <% error_param.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

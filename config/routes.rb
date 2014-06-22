@@ -1,4 +1,21 @@
+# coding: utf-8
+
 Rails.application.routes.draw do
+
+  #rootへのアクセスは、'users#index'へ
+  root :controller => 'users', :action => 'index'
+
+  #users
+  resources :users do
+    member do
+      #コメント新規登録実行
+      post 'comment', to: 'users#create_comment', as: 'create_comment'
+
+      #コメント削除実行
+      delete 'comment/:comment_id', to: 'users#destroy_comment', as: 'destroy_comment'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

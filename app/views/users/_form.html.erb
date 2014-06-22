@@ -1,0 +1,18 @@
+<%= form_for(@user) do |f| %>
+  <div class="field">
+    <%= f.label :名前 %><br>
+    <%= f.text_field :name, size:'30' %>
+  </div>
+  <div class="field">
+    <%= f.label :年齢 %><br>
+    <%= f.number_field :age, size:'10' %>
+  </div>
+  <div class="field">
+    <%= f.label :性別 %><br>
+    <%= f.radio_button :gender, true %>男
+    <%= f.radio_button :gender, false %>女
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
